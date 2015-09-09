@@ -45,6 +45,13 @@ def login():
 @app.route('/main')
 def main():
     return render_template('main.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('logged_in',None)
+    flash('yo were logged out')
+    return redirect (url_for('login'))
+
 if __name__ == '__main__':
     import os
     HOST = os.environ.get('SERVER_HOST', 'localhost')
@@ -53,4 +60,6 @@ if __name__ == '__main__':
     except ValueError:
         PORT = 5555
     app.debug = True
-    app.run(HOST, PORT)
+    # app.run(HOST, PORT)
+    app.run(HOST, 5000)
+
